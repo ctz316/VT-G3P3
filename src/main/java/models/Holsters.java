@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "holsters")
 public class Holsters {
-
+	
     // Variables
     @Id
     @Column(name = "holster_id")
@@ -14,7 +14,7 @@ public class Holsters {
     private String type;
     @Column(name = "size_id")
     private int sizeId;
-
+    
     // Constructors
     public Holsters() {}
     public Holsters(int holsterId, String type, int sizeId) {
@@ -22,7 +22,7 @@ public class Holsters {
         this.type = type;
         this.sizeId = sizeId;
     }
-
+    
     // To String method
     @Override
     public String toString() {
@@ -32,7 +32,7 @@ public class Holsters {
                 ", sizeId=" + sizeId +
                 '}';
     }
-
+    
     // Getters and Setters
     public int getHolsterId() {
         return holsterId;
