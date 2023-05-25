@@ -12,5 +12,4 @@ public class AmmunitionController {
     @Autowired
     private AmmunitionService service;
 
-// test test
 }
