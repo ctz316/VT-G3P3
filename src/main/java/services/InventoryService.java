@@ -12,7 +12,7 @@ public class InventoryService {
     private InventoryRepository inventoryRepo;
 
     // Can write extentions of (or simple duplications of) repository methods
-    public Iterable<Inventory> getALLInventory() {
+    public Iterable<Inventory> getAllInventory() {
         return inventoryRepo.findAll();
     }
 

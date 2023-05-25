@@ -12,7 +12,7 @@ public class GlocksService {
     private GlocksRepository glockRepo;
 
     // Can write extentions of (or simple duplications of) repository methods
-    public Iterable<Glocks> getALLGlocks() {
+    public Iterable<Glocks> getAllGlocks() {
         return glockRepo.findAll();
     }
 }

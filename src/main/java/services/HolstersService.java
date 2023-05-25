@@ -14,7 +14,7 @@ public class HolstersService {
     private HolstersRepository holstersRepo;
 
     // Can write extentions of (or simple duplications of) repository methods
-    public Iterable<Holsters> getALLHolsters() {
+    public Iterable<Holsters> getAllHolsters() {
         return holstersRepo.findAll();
     }
 

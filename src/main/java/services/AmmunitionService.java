@@ -16,7 +16,7 @@ public class AmmunitionService {
     private AmmunitionRepository ammunitionRepo;
 
     // Can write extentions of (or simple duplications of) repository methods
-    public Iterable<Ammunition> getALL() {
+    public Iterable<Ammunition> getAll() {
         return ammunitionRepo.findAll();
     }
 

@@ -12,7 +12,7 @@ public class WarehousesService {
     private WarehousesRepository warehouseRepo;
 
     // Can write extentions of (or simple duplications of) repository methods
-    public Iterable<Warehouses> getALLWarehouses() {
+    public Iterable<Warehouses> getAllWarehouses() {
         return warehouseRepo.findAll();
     }
 

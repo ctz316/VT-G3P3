@@ -12,7 +12,7 @@ public class SizesService {
     private SizesRepository sizesRepo;
 
     // Can write extentions of (or simple duplications of) repository methods
-    public Iterable<Sizes> getALLSizes() {
+    public Iterable<Sizes> getAllSizes() {
         return sizesRepo.findAll();
     }
 }

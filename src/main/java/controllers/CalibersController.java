@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import services.CalibersService;
 
 @RestController
-@RequestMapping("/caliber")
+@RequestMapping("/calibers")
 @CrossOrigin(origins = "*")
 public class CalibersController {
 

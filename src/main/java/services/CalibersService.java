@@ -12,7 +12,7 @@ public class CalibersService {
     private CalibersRepository caliberRepo;
 
     // Can write extentions of (or simple duplications of) repository methods
-    public Iterable<Calibers> getALLCalibers() {
+    public Iterable<Calibers> getAllCalibers() {
         return caliberRepo.findAll();
     }
 
