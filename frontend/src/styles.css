@@ -1,0 +1,27 @@
+html {
+  background-image: linear-gradient(#000000, #6C0303);
+  height: 1080px;
+  font-family: "Times New Roman", serif;
+}
+body {
+  text-align: center;
+  height: auto;
+  padding-bottom: 50px;
+}
+
+body {
+  color: darkgoldenrod;
+  height: auto;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
