@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+	
 @Entity
 @Table(name = "user")
 public class User {
@@ -24,6 +26,8 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
+	@OneToOne
+	@JoinColumn(name = "permission_id")
 	@Column(name = "permission_level")
 	private int permissionLevel;
 	

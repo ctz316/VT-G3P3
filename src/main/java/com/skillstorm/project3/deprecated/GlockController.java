@@ -1,4 +1,4 @@
-package com.skillstorm.project3.controllers;
+package com.skillstorm.project3.deprecated;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skillstorm.project3.services.CaliberService;
+import com.skillstorm.project3.services.GlockService;
 
 @RestController
-@RequestMapping("/calibers")
+@RequestMapping("/glocks")
 @CrossOrigin(origins = "*")
-public class CaliberController {
+public class GlockController {
 
-        @Autowired
-        private CaliberService service;
+    @Autowired
+    private GlockService service;
 
-        @GetMapping
-        public void test() {
-                System.out.println("Test");
-        }
+    @GetMapping
+    public void test() {
+        System.out.println("Test");
+    }
 
 }

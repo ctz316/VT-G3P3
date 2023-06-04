@@ -1,4 +1,4 @@
-package com.skillstorm.project3.controllers;
+package com.skillstorm.project3.deprecated;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skillstorm.project3.services.SizeService;
+import com.skillstorm.project3.services.WarehouseService;
 
 @RestController
-@RequestMapping("/sizes")
+@RequestMapping("/warehouse")
 @CrossOrigin(origins = "*")
-public class SizeController {
+public class WarehouseController {
 
     @Autowired
-    private SizeService service;
+    private WarehouseService service;
 
     @GetMapping
     public void test() {
