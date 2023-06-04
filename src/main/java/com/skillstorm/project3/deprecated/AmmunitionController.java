@@ -1,4 +1,4 @@
-package com.skillstorm.project3.controllers;
+package com.skillstorm.project3.deprecated;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
