@@ -7,4 +7,5 @@ import com.skillstorm.project3.models.Warehouse;
 
 @Repository
 public interface WarehouseRepository extends CrudRepository<Warehouse, Integer>{
+	
 }

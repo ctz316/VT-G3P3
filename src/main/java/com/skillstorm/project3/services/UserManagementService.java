@@ -3,12 +3,10 @@ package com.skillstorm.project3.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.skillstorm.project3.models.PermissionLevel;
+//import com.skillstorm.project3.models.PermissionLevel;
 import com.skillstorm.project3.models.User;
-import com.skillstorm.project3.models.UserSalt;
 import com.skillstorm.project3.repositories.PermissionLevelRepository;
 import com.skillstorm.project3.repositories.UserRepository;
-import com.skillstorm.project3.repositories.UserSaltRepository;
 
 @Service
 public class UserManagementService {
@@ -17,36 +15,52 @@ public class UserManagementService {
 	private UserRepository userRepo;
 	
 	@Autowired
-	private UserSaltRepository userSaltsRepo;
+	private PermissionLevelRepository permissionsRepo;	
 	
-	@Autowired
-	private PermissionLevelRepository permissionsRepo;
-	
-	public User getUser(int id) {
-		if(userRepo.existsById(id)) {
+	// USERS
+	public User getUserById(int id) {
+		if (checkUserExists(id)) {
 			return userRepo.findById(id).get();
 		} else {
 			return null;
 		}
 	}
 	
+	public boolean checkUserExists(int id) {
+		return userRepo.existsById(id);
+	}
+	
 	public Iterable<User> getAllUsers() {
 		return userRepo.findAll();
 	}
 	
-	public UserSalt getUserSalt(int id) {
-		if(userSaltsRepo.existsById(id)) {
-			return userSaltsRepo.findById(id).get();
-		} else {
+	public User addUser(User user) {
+		if (checkUserExists(user.getUserId())) {
 			return null;
+		} else {
+			return userRepo.save(user);
 		}
 	}
 	
-	public PermissionLevel getUserPermissions(int id) {
-		if(permissionsRepo.existsById(id)) {
-			return permissionsRepo.findById(id).get();
+	public User updateUser(User user) {
+		return userRepo.save(user);
+	}
+	
+	public boolean deleteById(int id) {
+		if (checkUserExists(id)) {
+			userRepo.deleteById(id);
+			return !checkUserExists(id);
 		} else {
-			return null;
+			return checkUserExists(id);
 		}
 	}
+	
+	// PERMISSIONS
+//	public PermissionLevel getUserPermissionLevel(User user) {
+//		if (user != null) {
+//			return permissionsRepo.findById(user.getPermissionLevel().getPermissionsId()).get();
+//		} else {
+//			return null;
+//		}
+//	}	
 }

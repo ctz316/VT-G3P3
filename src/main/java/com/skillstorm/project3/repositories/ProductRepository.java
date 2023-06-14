@@ -3,8 +3,9 @@ package com.skillstorm.project3.repositories;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.skillstorm.project3.models.Holster;
+import com.skillstorm.project3.models.Product;
+
 
 @Repository
-public interface HolsterRepository extends CrudRepository<Holster, Integer>{
+public interface ProductRepository extends CrudRepository<Product, Integer>{
 }
