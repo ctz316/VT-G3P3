@@ -7,40 +7,32 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skillstorm.project3.models.Warehouse;
-import com.skillstorm.project3.services.AmmunitionService;
-import com.skillstorm.project3.services.CaliberService;
-import com.skillstorm.project3.services.GlockService;
-import com.skillstorm.project3.services.HolsterService;
+import com.skillstorm.project3.models.Inventory;
 import com.skillstorm.project3.services.InventoryService;
-import com.skillstorm.project3.services.SizeService;
-import com.skillstorm.project3.services.WarehouseService;
+import com.skillstorm.project3.services.ProductService;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/inv")
 @CrossOrigin(origins = "*")
-public class ProductController {
+public class InventoryController {
 		
-	@Autowired
-	AmmunitionService ammoServ;
-	
-	@Autowired
-	CaliberService calServ;
-	
-	@Autowired
-	GlockService glockServ;
-	
-	@Autowired
-	HolsterService holsterServ;
-	
-	@Autowired
+	@Autowired 
 	InventoryService invServ;
 	
-	@Autowired
-	SizeService sizeServ;
+	@GetMapping("/wh/{whId}")
+	public Iterable<Inventory> getInvByWhId(@PathVariable int whId) {
+		return invServ.getInvByWhId(whId);
+	}
 	
-	@Autowired
-	WarehouseService wareHouseServ;
+	@GetMapping("/all")
+	public Iterable<Inventory> getAllInv() {
+		return invServ.getAllInventory();
+	}
+	
+	@GetMapping("/{invId}")
+	public Inventory getInvById(@PathVariable int invId) {
+		return invServ.getInventoryById(invId);
+	}
 	
 //	@GetMapping("/{id}")
 //	public Warehouse getUser(@PathVariable int id) {

@@ -20,23 +20,22 @@ public class User {
 	@Column(name = "user_id")
 	private int userId;
 	
-	@Column(name = "username")
-	private String username;
+	@Column(name = "email")
+	private String email;
 	
 	@Column(name = "password")
 	private String password;
 	
-	@OneToOne
-	@JoinColumn(name = "permission_id")
-	@Column(name = "permission_level")
-	private int permissionLevel;
+	@OneToOne	
+	@JoinColumn(name = "permission_level")
+	private PermissionLevel permissionLevel;
 	
 	public User() { }
 
-	public User(int userId, String username, String password, int permissionLevel) {
+	public User(int userId, String email, String password, PermissionLevel permissionLevel) {
 		super();
 		this.userId = userId;
-		this.username = username;
+		this.email = email;
 		this.password = password;
 		this.permissionLevel = permissionLevel;
 	}
@@ -49,12 +48,12 @@ public class User {
 		this.userId = userId;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -65,11 +64,11 @@ public class User {
 		this.password = password;
 	}
 
-	public int getPermissionLevel() {
+	public PermissionLevel getPermissionLevel() {
 		return permissionLevel;
 	}
 
-	public void setPermissionLevel(int permissionLevel) {
+	public void setPermissionLevel(PermissionLevel permissionLevel) {
 		this.permissionLevel = permissionLevel;
 	}
 
@@ -92,7 +91,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", permissionLevel="
+		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", permissionLevel="
 				+ permissionLevel + "]";
 	}	
 }

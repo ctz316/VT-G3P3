@@ -8,12 +8,45 @@ import com.skillstorm.project3.repositories.WarehouseRepository;
 
 @Service
 public class WarehouseService {
-
-    @Autowired
-    private WarehouseRepository warehouseRepo;
-
-    public Iterable<Warehouse> getAllWarehouses() {
-        return warehouseRepo.findAll();
-    }
-
+	
+	@Autowired
+	private WarehouseRepository whRepo;
+	
+	public Warehouse getWarehouseById(int id) {
+		if (checkWarehouseExists(id)) {
+			return whRepo.findById(id).get();
+		} else {
+			return null;
+		}
+	}
+	
+	public boolean checkWarehouseExists(int id) {
+		return whRepo.existsById(id);
+	}
+	
+	public Iterable<Warehouse> getAllWarehouses() {
+		return whRepo.findAll();
+	}
+	
+	public Warehouse addWarehouse(Warehouse warehouse) {
+		if (checkWarehouseExists(warehouse.getWarehouseId())) {
+			return null;
+		} else {
+			return whRepo.save(warehouse);
+		}
+	}
+	
+	public Warehouse updateWarehouse(Warehouse warehouse) {
+		return whRepo.save(warehouse);
+	}
+	
+	public boolean deleteById(int id) {
+		if (checkWarehouseExists(id)) {
+			whRepo.deleteById(id);
+			return !checkWarehouseExists(id);
+		} else {
+			return checkWarehouseExists(id);
+		}
+	}
+	
 }
