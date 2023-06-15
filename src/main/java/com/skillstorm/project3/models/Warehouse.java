@@ -19,7 +19,7 @@ public class Warehouse {
     private int warehouseId;
     
     @Column(name = "capacity")
-    private int warehouseName;
+    private int capacity;
     
     @Column(name = "active")
     private int active;
@@ -30,10 +30,10 @@ public class Warehouse {
     	this.warehouseId = warehouseId;
     }
     
-    public Warehouse(int warehouseId, int warehouseName, int active) {
+    public Warehouse(int warehouseId, int capacity, int active) {
 		super();
 		this.warehouseId = warehouseId;
-		this.warehouseName = warehouseName;
+		this.capacity = capacity;
 		this.active = active;
 	}
 
@@ -45,12 +45,12 @@ public class Warehouse {
 		this.warehouseId = warehouseId;
 	}
 
-	public int getWarehouseName() {
-		return warehouseName;
+	public int getCapacity() {
+		return capacity;
 	}
 
-	public void setWarehouseName(int warehouseName) {
-		this.warehouseName = warehouseName;
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
 	}
 
 	public int getActive() {
@@ -63,7 +63,7 @@ public class Warehouse {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(active, warehouseId, warehouseName);
+		return Objects.hash(active, warehouseId, capacity);
 	}
 
 	@Override
@@ -75,12 +75,12 @@ public class Warehouse {
 		if (getClass() != obj.getClass())
 			return false;
 		Warehouse other = (Warehouse) obj;
-		return active == other.active && warehouseId == other.warehouseId && warehouseName == other.warehouseName;
+		return active == other.active && warehouseId == other.warehouseId && capacity == other.capacity;
 	}
 
 	@Override
 	public String toString() {
-		return "Warehouse [warehouseId=" + warehouseId + ", warehouseName=" + warehouseName + ", active=" + active
+		return "Warehouse [warehouseId=" + warehouseId + ", capacity=" + capacity + ", active=" + active
 				+ "]";
 	}
 

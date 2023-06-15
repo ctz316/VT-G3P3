@@ -20,8 +20,8 @@ public class InventoryController {
 	InventoryService invServ;
 	
 	@GetMapping("/wh/{whId}")
-	public Iterable<Inventory> getInvByWhId(@PathVariable int whId) {
-		return invServ.getInvByWhId(whId);
+	public Iterable<Inventory> getInvByWarehouseId(@PathVariable int whId) {
+		return invServ.getInvByWarehouseId(whId);
 	}
 	
 	@GetMapping("/all")

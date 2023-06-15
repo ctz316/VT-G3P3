@@ -19,6 +19,10 @@ public class PermissionLevel {
 	private String name;
 	
 	public PermissionLevel() { }
+	
+	public PermissionLevel(int permissionId) {
+		this.permissionId = permissionId;
+	}
 
 	public PermissionLevel(int permissionid, String name) {
 		super();

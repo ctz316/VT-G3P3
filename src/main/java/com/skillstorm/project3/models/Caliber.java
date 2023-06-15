@@ -15,6 +15,7 @@ public class Caliber {
     @Id
     @Column(name = "caliber_id")
     private int caliberID;
+    
     @Column(name = "caliber_name")
     private String caliberName;
 

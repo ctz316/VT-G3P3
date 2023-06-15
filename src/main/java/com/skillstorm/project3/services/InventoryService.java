@@ -41,7 +41,7 @@ public class InventoryService {
     		invRepo.save(new Inventory(0, new Warehouse(whId), new Product(pId), qty));
 	}
     
-    public Iterable<Inventory> getInvByWhId(int whId) {
-    	return invRepo.findByWarehouseId(whId);
+    public Iterable<Inventory> getInvByWarehouseId(int whId) {
+    	return invRepo.findByWarehouseId(new Warehouse(whId));
     }
 }
