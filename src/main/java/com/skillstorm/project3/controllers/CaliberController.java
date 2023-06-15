@@ -12,41 +12,41 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.skillstorm.project3.models.Size;
-import com.skillstorm.project3.services.SizeService;
+import com.skillstorm.project3.models.Caliber;
+import com.skillstorm.project3.services.CaliberService;
 
 @RestController
-@RequestMapping("/sizes")
+@RequestMapping("/calibers")
 @CrossOrigin(origins = "*")
-public class SizeController {
+public class CaliberController {
 
     @Autowired
-    SizeService sizeService;
+    CaliberService calService;
 
     @GetMapping("/all")
-    public Iterable<Size> getAllSizes() {
-        return sizeService.getAllSizes();
+    public Iterable<Caliber> getAllCalibers() {
+        return calService.getAllCalibers();
     }
     
     @GetMapping("/{id}")
-    public Size getSizeById(@PathVariable int id) {
-    	return sizeService.getSizeById(id);
+    public Caliber getCaliberById(@PathVariable int id) {
+    	return calService.getCaliberById(id);
     }
     
     @PostMapping("/new")
-    public ResponseEntity<Size> addSize(@RequestBody Size size) {
-    	if(!sizeService.checkSizeExists(size.getSizeId())) {
-    		Size temp = sizeService.addSize(size);
+    public ResponseEntity<Caliber> addCaliber(@RequestBody Caliber caliber) {
+    	if(!calService.checkCaliberExists(caliber.getCaliberId())) {
+    		Caliber temp = calService.addCaliber(caliber);
     		if(temp != null) {
     			return ResponseEntity.status(HttpStatus.CREATED).body(temp);
 			}
 		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(size);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(caliber);
     }
     
     @DeleteMapping("/del/{id}")
-    public ResponseEntity<Size> deleteSize(@PathVariable int id) {
-		if (sizeService.deleteSizeById(id)) {
+    public ResponseEntity<Caliber> deleteCaliber(@PathVariable int id) {
+		if (calService.deleteCaliberById(id)) {
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
@@ -54,9 +54,9 @@ public class SizeController {
 	}
     
     @PutMapping("/upd")
-	public ResponseEntity<Size> updateSize(@RequestBody Size size) {
-		if(size != null && sizeService.checkSizeExists(size.getSizeId())) {
-			return ResponseEntity.status(HttpStatus.OK).body(sizeService.updateSize(size));
+	public ResponseEntity<Caliber> updateCaliber(@RequestBody Caliber caliber) {
+		if(caliber != null && calService.checkCaliberExists(caliber.getCaliberId())) {
+			return ResponseEntity.status(HttpStatus.OK).body(calService.updateCaliber(caliber));
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}

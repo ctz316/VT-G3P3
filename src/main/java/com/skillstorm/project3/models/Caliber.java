@@ -14,22 +14,22 @@ public class Caliber {
 
     @Id
     @Column(name = "caliber_id")
-    private int caliberID;
+    private int caliberId;
     
     @Column(name = "caliber_name")
     private String caliberName;
 
     public Caliber() {}
     public Caliber(int caliberID, String caliberName) {
-        this.caliberID = caliberID;
+        this.caliberId = caliberID;
         this.caliberName = caliberName;
     }
 
-    public int getCaliberID() {
-        return caliberID;
+    public int getCaliberId() {
+        return caliberId;
     }
-    public void setCaliberID(int caliberID) {
-        this.caliberID = caliberID;
+    public void setCaliberId(int caliberID) {
+        this.caliberId = caliberID;
     }
     public String getCaliberName() {
         return caliberName;
@@ -40,11 +40,11 @@ public class Caliber {
     
 	@Override
 	public String toString() {
-		return "Caliber [caliberID=" + caliberID + ", caliberName=" + caliberName + "]";
+		return "Caliber [caliberId=" + caliberId + ", caliberName=" + caliberName + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(caliberID, caliberName);
+		return Objects.hash(caliberId, caliberName);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -55,7 +55,7 @@ public class Caliber {
 		if (getClass() != obj.getClass())
 			return false;
 		Caliber other = (Caliber) obj;
-		return caliberID == other.caliberID && Objects.equals(caliberName, other.caliberName);
+		return caliberId == other.caliberId && Objects.equals(caliberName, other.caliberName);
 	}
 
 	

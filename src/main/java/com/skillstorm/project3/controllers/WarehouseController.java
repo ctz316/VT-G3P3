@@ -12,41 +12,42 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.skillstorm.project3.models.Size;
-import com.skillstorm.project3.services.SizeService;
+
+import com.skillstorm.project3.models.Warehouse;
+import com.skillstorm.project3.services.WarehouseService;
 
 @RestController
-@RequestMapping("/sizes")
+@RequestMapping("/warehouse")
 @CrossOrigin(origins = "*")
-public class SizeController {
+public class WarehouseController {
 
     @Autowired
-    SizeService sizeService;
+    private WarehouseService whService;
 
     @GetMapping("/all")
-    public Iterable<Size> getAllSizes() {
-        return sizeService.getAllSizes();
+    public Iterable<Warehouse> getAllWarehouses() {
+        return whService.getAllWarehouses();
     }
     
     @GetMapping("/{id}")
-    public Size getSizeById(@PathVariable int id) {
-    	return sizeService.getSizeById(id);
+    public Warehouse getWarehouseById(@PathVariable int id) {
+    	return whService.getWarehouseById(id);
     }
     
     @PostMapping("/new")
-    public ResponseEntity<Size> addSize(@RequestBody Size size) {
-    	if(!sizeService.checkSizeExists(size.getSizeId())) {
-    		Size temp = sizeService.addSize(size);
+    public ResponseEntity<Warehouse> addWarehouse(@RequestBody Warehouse warehouse) {
+    	if(!whService.checkWarehouseExists(warehouse.getWarehouseId())) {
+    		Warehouse temp = whService.addWarehouse(warehouse);
     		if(temp != null) {
     			return ResponseEntity.status(HttpStatus.CREATED).body(temp);
 			}
 		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(size);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(warehouse);
     }
     
     @DeleteMapping("/del/{id}")
-    public ResponseEntity<Size> deleteSize(@PathVariable int id) {
-		if (sizeService.deleteSizeById(id)) {
+    public ResponseEntity<Warehouse> deleteWarehouse(@PathVariable int id) {
+		if (whService.deleteWarehouseById(id)) {
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
@@ -54,9 +55,9 @@ public class SizeController {
 	}
     
     @PutMapping("/upd")
-	public ResponseEntity<Size> updateSize(@RequestBody Size size) {
-		if(size != null && sizeService.checkSizeExists(size.getSizeId())) {
-			return ResponseEntity.status(HttpStatus.OK).body(sizeService.updateSize(size));
+	public ResponseEntity<Warehouse> updateWarehouse(@RequestBody Warehouse warehouse) {
+		if(warehouse != null && whService.checkWarehouseExists(warehouse.getWarehouseId())) {
+			return ResponseEntity.status(HttpStatus.OK).body(whService.updateWarehouse(warehouse));
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}

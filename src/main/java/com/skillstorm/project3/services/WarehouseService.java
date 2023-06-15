@@ -40,7 +40,7 @@ public class WarehouseService {
 		return whRepo.save(warehouse);
 	}
 	
-	public boolean deleteById(int id) {
+	public boolean deleteWarehouseById(int id) {
 		if (checkWarehouseExists(id)) {
 			whRepo.deleteById(id);
 			return !checkWarehouseExists(id);
