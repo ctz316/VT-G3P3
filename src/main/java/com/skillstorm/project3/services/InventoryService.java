@@ -11,43 +11,88 @@ import com.skillstorm.project3.repositories.InventoryRepository;
 @Service
 public class InventoryService {
 
-    @Autowired
-    private InventoryRepository invRepo;
+	@Autowired
+	private InventoryRepository invRepo;
 
-    
-    public Iterable<Inventory> getAllInventory() {
-        return invRepo.findAll();
-    }
-    
-//    public Inventory getInvById(int invId) {
-//    	System.out.println(invRepo.findById(invId).get());
-//    	return invRepo.findById(invId).get();
-//    }
-    
-    public Inventory getInventoryById(int id) {
-		if (checkInventoryExists(id)) {
-			System.out.println(invRepo.findById(id).get());
+	@Autowired
+	private WarehouseService whServ;
+
+	public Iterable<Inventory> getAllInventory() {
+		return invRepo.findAll();
+	}
+
+//	public Inventory getInventoryById(int invId) {
+//		if (checkInventoryExistsById(invId)) {
+//			return invRepo.findById(invId).get();
+//		} else {
+//			return null;
+//		}
+//	}
+	
+	public Inventory getInventoryById(int id) {
+		if (checkInventoryExistsById(id)) {
 			return invRepo.findById(id).get();
 		} else {
 			return null;
 		}
 	}
-    
-    private boolean checkInventoryExists(int id) {
-    	return invRepo.existsById(id);
-    }
 
+	public Inventory getWarehouseInvByProduct(Warehouse warehouse, Product product) {
+		return invRepo.findWarehouseInvByProductId(warehouse.getWarehouseId(), product.getProductId());
+	}
+
+	public boolean checkInventoryExistsById(int id) {
+		return invRepo.existsById(id);
+	}
 	
-    public Iterable<Inventory> getInvByWarehouseId(int whId) {
-    	return invRepo.findByWarehouseId(new Warehouse(whId));
-    }
-    
-    public Iterable<Inventory> getInvByProductId(int productId) {
-    	return invRepo.findByProductId(new Product(productId));
-    }
-    
-    public void addInvToWarehouse(int whId, int pId, int qty) {
-		invRepo.save(new Inventory(0, new Warehouse(whId), new Product(pId), qty));
+	public boolean checkInventoryExistsInWhByProd(Warehouse warehouse, Product product) {
+		return invRepo.existsByWarehouseIdAndProductId(warehouse, product);
+	}
+
+	public Iterable<Inventory> getInvByWarehouseId(int whId) {
+		if (whServ.checkWarehouseExists(whId)) {
+			return invRepo.findByWarehouseId(whServ.getWarehouseById(whId));
+		}
+
+		return null;
+	}
+
+	public Iterable<Inventory> getInvByProductId(int productId) {
+		return invRepo.findByProductId(new Product(productId));
+	}
+
+	public Inventory adjustWarehouseInv(Inventory inv, String updateModifier) {
+		if (inv == null) {
+			return null;
+		}
+
+		Inventory temp = getWarehouseInvByProduct(inv.getWarehouseId(), inv.getProductId());
+
+		if (!checkInventoryExistsById(inv.getInventoryId()) && temp == null) {
+			return invRepo.save(inv);
+		} else if (temp != null && updateModifier != null) {
+			switch(updateModifier) {
+				case "add":
+					temp.addQuantity(inv.getQuantity());
+				case "substract":
+					temp.addQuantity(-inv.getQuantity());
+				case "update":
+					temp.setQuantity(inv.getQuantity());
+			}
+			
+			return invRepo.save(temp);
+		} else {
+			return null;
+		}
+	}
+	
+	public boolean deleteById(int id) {
+		if (checkInventoryExistsById(id)) {
+			invRepo.deleteById(id);
+			return !checkInventoryExistsById(id);
+		} else {
+			return checkInventoryExistsById(id);
+		}
 	}
 
 }
