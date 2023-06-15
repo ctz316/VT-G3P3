@@ -1,6 +1,5 @@
 package com.skillstorm.project3.controllers;
 
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skillstorm.project3.models.PermissionLevel;
 import com.skillstorm.project3.models.User;
 import com.skillstorm.project3.services.UserManagementService;
 
@@ -51,7 +49,6 @@ public class UserManagementController {
 	
 	@PutMapping("/upd")
 	public ResponseEntity<User> updateUser(@RequestBody User user) {
-		System.out.println("put mapping");
 		if(user != null && userServ.checkUserExists(user.getUserId())) {
 			return ResponseEntity.status(HttpStatus.OK).body(userServ.updateUser(user));
 		} else {
