@@ -35,13 +35,19 @@ public class InventoryService {
     
     private boolean checkInventoryExists(int id) {
     	return invRepo.existsById(id);
-}
+    }
 
-	public void addProdToWarehouseById(int whId, int pId, int qty) {
-    		invRepo.save(new Inventory(0, new Warehouse(whId), new Product(pId), qty));
-	}
-    
+	
     public Iterable<Inventory> getInvByWarehouseId(int whId) {
     	return invRepo.findByWarehouseId(new Warehouse(whId));
     }
+    
+    public Iterable<Inventory> getInvByProductId(int productId) {
+    	return invRepo.findByProductId(new Product(productId));
+    }
+    
+    public void addInvToWarehouse(int whId, int pId, int qty) {
+		invRepo.save(new Inventory(0, new Warehouse(whId), new Product(pId), qty));
+	}
+
 }
