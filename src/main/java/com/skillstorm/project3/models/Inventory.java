@@ -26,18 +26,18 @@ public class Inventory {
     
     @OneToOne
     @JoinColumn(name = "product_id")
-    private Product procuctId;
+    private Product productId;
     
     @Column(name = "quantity")
     private int quantity;
 
     public Inventory() { }
 
-	public Inventory(int inventoryId, Warehouse warehouseId, Product procuctId, int quantity) {
+	public Inventory(int inventoryId, Warehouse warehouseId, Product productId, int quantity) {
 		super();
 		this.inventoryId = inventoryId;
 		this.warehouseId = warehouseId;
-		this.procuctId = procuctId;
+		this.productId = productId;
 		this.quantity = quantity;
 	}
 
@@ -57,12 +57,12 @@ public class Inventory {
 		this.warehouseId = warehouseId;
 	}
 
-	public Product getProcuctId() {
-		return procuctId;
+	public Product getProductId() {
+		return productId;
 	}
 
-	public void setProcuctId(Product procuctId) {
-		this.procuctId = procuctId;
+	public void setProductId(Product productId) {
+		this.productId = productId;
 	}
 
 	public int getQuantity() {
@@ -75,13 +75,13 @@ public class Inventory {
 
 	@Override
 	public String toString() {
-		return "WarehouseInventory [inventory=" + inventoryId + ", warehouseId=" + warehouseId + ", procuctId="
-				+ procuctId + ", quantity=" + quantity + "]";
+		return "WarehouseInventory [inventory=" + inventoryId + ", warehouseId=" + warehouseId + ", productId="
+				+ productId + ", quantity=" + quantity + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(inventoryId, procuctId, quantity, warehouseId);
+		return Objects.hash(inventoryId, productId, quantity, warehouseId);
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class Inventory {
 		if (getClass() != obj.getClass())
 			return false;
 		Inventory other = (Inventory) obj;
-		return inventoryId == other.inventoryId && Objects.equals(procuctId, other.procuctId) && quantity == other.quantity
+		return inventoryId == other.inventoryId && Objects.equals(productId, other.productId) && quantity == other.quantity
 				&& Objects.equals(warehouseId, other.warehouseId);
 	}
     
