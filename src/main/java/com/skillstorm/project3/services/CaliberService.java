@@ -42,7 +42,7 @@ public class CaliberService {
     		calRepo.deleteById(id);
     		return !checkCaliberExists(id);
 		} else {
-			return !checkCaliberExists(id);
+			return checkCaliberExists(id);
 		}	
     }
     
