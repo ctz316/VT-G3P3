@@ -2,12 +2,14 @@ package com.skillstorm.project3.models;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -20,11 +22,11 @@ public class Inventory {
     @Column(name = "inventory_id")
     private int inventoryId;
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouseId;
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product productId;
     
@@ -39,6 +41,10 @@ public class Inventory {
 		this.warehouseId = warehouseId;
 		this.productId = productId;
 		this.quantity = quantity;
+	}
+		
+	public void addQuantity(int quantity) {
+		this.quantity += quantity;
 	}
 
 	public int getInventoryId() {
@@ -73,10 +79,12 @@ public class Inventory {
 		this.quantity = quantity;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "WarehouseInventory [inventory=" + inventoryId + ", warehouseId=" + warehouseId + ", productId="
-				+ productId + ", quantity=" + quantity + "]";
+		return "Inventory [inventoryId=" + inventoryId + ", warehouseId=" + warehouseId + ", productId=" + productId
+				+ ", quantity=" + quantity + "]";
 	}
 
 	@Override
@@ -93,8 +101,9 @@ public class Inventory {
 		if (getClass() != obj.getClass())
 			return false;
 		Inventory other = (Inventory) obj;
-		return inventoryId == other.inventoryId && Objects.equals(productId, other.productId) && quantity == other.quantity
-				&& Objects.equals(warehouseId, other.warehouseId);
+		return inventoryId == other.inventoryId && Objects.equals(productId, other.productId)
+				&& quantity == other.quantity && Objects.equals(warehouseId, other.warehouseId);
 	}
+
     
 }
