@@ -1,5 +1,7 @@
 package com.skillstorm.project3.controllers;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,13 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skillstorm.project3.models.Inventory;
 import com.skillstorm.project3.models.PermissionLevel;
 import com.skillstorm.project3.models.User;
-import com.skillstorm.project3.services.InventoryService;
 import com.skillstorm.project3.services.UserManagementService;
 
 @RestController
@@ -38,16 +37,16 @@ public class UserManagementController {
 		return userServ.getAllUsers();
 	}
 	
+	
 	@PostMapping("/new")
 	public ResponseEntity<User> addUser(@RequestBody User user) {
-		System.out.println("new");
-		if (!userServ.checkUserExists(user.getUserId()))  {
-			System.out.println("if");
-			return ResponseEntity.status(HttpStatus.CREATED).body(userServ.addUser(user));
-		} else {
-			System.out.println("else");
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(user);			
+		if (!userServ.checkUserExists(user.getUserId())) {
+			User temp = userServ.addUser(user);
+			if (temp != null) {
+				return ResponseEntity.status(HttpStatus.CREATED).body(temp);
+			}
 		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(user);
 	}
 	
 	@PutMapping("/upd")

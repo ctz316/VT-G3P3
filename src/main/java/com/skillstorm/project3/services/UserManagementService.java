@@ -1,6 +1,11 @@
 package com.skillstorm.project3.services;
 
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 //import com.skillstorm.project3.models.PermissionLevel;
@@ -17,11 +22,18 @@ public class UserManagementService {
 	@Autowired
 	private PermissionLevelRepository permissionsRepo;	
 	
-	// USERS
 	public User getUserById(int id) {
 		if (checkUserExists(id)) {
 			return userRepo.findById(id).get();
 		} else {
+			return null;
+		}
+	}
+	
+	public ArrayList<User> getUserByEmail(String email) {
+		try {
+			return userRepo.findByEmail(email);
+		} catch (NoSuchElementException e) {
 			return null;
 		}
 	}
@@ -34,16 +46,23 @@ public class UserManagementService {
 		return userRepo.findAll();
 	}
 	
-	public User addUser(User user) {
-		if (checkUserExists(user.getUserId())) {
-			return null;
-		} else {
-			return userRepo.save(user);
+	public User addUser(User user) {		
+		if (!checkUserExists(user.getUserId())) {
+			ArrayList<User> checkUsers = getUserByEmail(user.getEmail());
+			if (checkUsers.size() == 0) {
+				return userRepo.save(user);
+			}
 		}
+		
+		return null;
 	}
 	
 	public User updateUser(User user) {
-		return userRepo.save(user);
+		if (checkUserExists(user.getUserId())) {
+			return userRepo.save(user);
+		}
+		
+		return null;		
 	}
 	
 	public boolean deleteById(int id) {
