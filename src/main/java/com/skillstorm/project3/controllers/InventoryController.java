@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skillstorm.project3.models.Inventory;
 import com.skillstorm.project3.services.InventoryService;
-import com.skillstorm.project3.services.ProductService;
 
 @RestController
 @RequestMapping("/inv")
