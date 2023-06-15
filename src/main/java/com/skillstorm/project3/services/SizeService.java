@@ -12,6 +12,10 @@ public class SizeService {
 
     @Autowired
     private SizeRepository sizeRepo;
+    
+    public boolean checkSizeExists(int id) {
+		return sizeRepo.existsById(id);
+	}
 
     // GETS
     public Iterable<Size> getAllSizes() {
@@ -27,26 +31,28 @@ public class SizeService {
 	}
     
     // ADD
-    public ResponseEntity<String> addSize (Size size) {
-    	if (sizeRepo.existsById(size.getSizeId())) {
-    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Size with id " + size.getSizeId() + " already exists");	
+    public Size addSize (Size size) {
+    	if (!sizeRepo.existsById(size.getSizeId())) {
+    		return sizeRepo.save(size);	
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Size with id " + size.getSizeId() + " has been inserted");
+		return null;
 	}
     
     // DELETE
-    public ResponseEntity<String> deleteSizeById (int id) {
-    	if (sizeRepo.existsById(id)) {
+    public boolean deleteSizeById (int id) {
+    	if (checkSizeExists(id)) {
     		sizeRepo.deleteById(id);
-    		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Size with id of " + id + " was successfully deleted.");
+    		return !checkSizeExists(id);
 		} else {
-
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Size with id of " + id + " does not exist!");
+			return !checkSizeExists(id);
 		}	
     }
     
     // UPDATE
     public Size updateSize (Size size) {
-    	return sizeRepo.save(size);
+    	if (checkSizeExists(size.getSizeId())) {
+    		return sizeRepo.save(size);
     	}
+    	return null;
+    }
 }
