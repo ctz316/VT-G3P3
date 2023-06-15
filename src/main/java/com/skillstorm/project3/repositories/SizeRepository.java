@@ -7,4 +7,6 @@ import com.skillstorm.project3.models.Size;
 
 @Repository
 public interface SizeRepository extends CrudRepository<Size, Integer>{
+	
+	
 }
