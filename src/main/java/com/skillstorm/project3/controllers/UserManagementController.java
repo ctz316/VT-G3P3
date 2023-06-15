@@ -40,36 +40,21 @@ public class UserManagementController {
 	
 	@PostMapping("/new")
 	public ResponseEntity<User> addUser(@RequestBody User user) {
-		if (userServ.checkUserExists(user.getUserId()))  {
+		System.out.println("new");
+		if (!userServ.checkUserExists(user.getUserId()))  {
+			System.out.println("if");
 			return ResponseEntity.status(HttpStatus.CREATED).body(userServ.addUser(user));
 		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);			
+			System.out.println("else");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(user);			
 		}
 	}
 	
-	@PutMapping("/upd/{id}")
-	public ResponseEntity<User> updateUser(@PathVariable int id,
-										   @RequestParam(name = "email", required = false) String email,
-										   @RequestParam(name = "password", required = false) String password,
-										   @RequestParam(name = "permissionLevel", required = false) String permissionLevel) {
-		
-		if(userServ.checkUserExists(id)) {
-			User tempU = userServ.getUserById(id);
-			
-			if(email != null && email != tempU.getEmail()) {
-				tempU.setEmail(email);
-			}
-			
-			if(password != null && password != tempU.getPassword()) {
-				tempU.setPassword(password);
-			}
-			
-			if(permissionLevel != null && Integer.valueOf(permissionLevel) != tempU.getPermissionLevel().getPermissionsId()) {
-				PermissionLevel tempPL = new PermissionLevel();
-				tempPL.setPermissionId(Integer.valueOf(permissionLevel));
-				tempU.setPermissionLevel(tempPL);
-			}
-			return ResponseEntity.status(HttpStatus.OK).body(userServ.updateUser(tempU));
+	@PutMapping("/upd")
+	public ResponseEntity<User> updateUser(@RequestBody User user) {
+		System.out.println("put mapping");
+		if(user != null && userServ.checkUserExists(user.getUserId())) {
+			return ResponseEntity.status(HttpStatus.OK).body(userServ.updateUser(user));
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
