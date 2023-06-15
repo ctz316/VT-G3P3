@@ -47,7 +47,7 @@ public class SizeController {
     }
     
     @DeleteMapping("/del/{id}")
-    public ResponseEntity<Size> deleteSize(int id) {
+    public ResponseEntity<Size> deleteSize(@PathVariable int id) {
 		if (sizeService.deleteSizeById(id)) {
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 		} else {
@@ -57,7 +57,6 @@ public class SizeController {
     
     @PutMapping("/upd")
 	public ResponseEntity<Size> updateSize(@RequestBody Size size) {
-		System.out.println("put mapping");
 		if(size != null && sizeService.checkSizeExists(size.getSizeId())) {
 			return ResponseEntity.status(HttpStatus.OK).body(sizeService.updateSize(size));
 		} else {
