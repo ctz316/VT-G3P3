@@ -25,8 +25,20 @@ public class UserManagementController {
 	@Autowired
 	UserManagementService userServ;
 	
+	@PostMapping("/login")
+	public ResponseEntity<User> authUser(@RequestBody User user) {
+		if (user != null) {
+			User temp = userServ.authUser(user);
+			if (temp != null) {
+				return ResponseEntity.status(HttpStatus.OK).body(temp);
+			}
+		}
+
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+	}
+
 	@GetMapping("/{id}")
-	public User getUser(@PathVariable int id) {
+	public User getUser(@PathVariable int id) {	
 		return userServ.getUserById(id);
 	}
 	

@@ -19,8 +19,8 @@ public class UserManagementService {
 	@Autowired
 	private UserRepository userRepo;
 	
-	@Autowired
-	private PermissionLevelRepository permissionsRepo;	
+//	@Autowired
+//	private PermissionLevelRepository permissionsRepo;	
 	
 	public User getUserById(int id) {
 		if (checkUserExists(id)) {
@@ -72,6 +72,13 @@ public class UserManagementService {
 		} else {
 			return checkUserExists(id);
 		}
+	}
+	
+	public User authUser(User u) {
+		if (u != null) {
+			return userRepo.findByEmailAndPassword(u.getEmail(), u.getPassword());
+		}
+		return null;
 	}
 	
 	// PERMISSIONS
