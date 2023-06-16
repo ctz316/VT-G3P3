@@ -23,7 +23,7 @@ import com.skillstorm.project3.services.InventoryService;
 public class InventoryController {
 		
 	@Autowired 
-	InventoryService invServ;
+	private InventoryService invServ;
 	
 	@GetMapping("/wh/{whId}")
 	public Iterable<Inventory> getInvByWarehouseId(@PathVariable int whId) {

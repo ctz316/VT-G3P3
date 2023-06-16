@@ -23,7 +23,7 @@ import com.skillstorm.project3.services.UserManagementService;
 public class UserManagementController {
 	
 	@Autowired
-	UserManagementService userServ;
+	private UserManagementService userServ;
 	
 	@PostMapping("/login")
 	public ResponseEntity<User> authUser(@RequestBody User user) {

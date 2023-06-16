@@ -21,7 +21,7 @@ import com.skillstorm.project3.services.SizeService;
 public class SizeController {
 
     @Autowired
-    SizeService sizeService;
+    private SizeService sizeService;
 
     @GetMapping("/all")
     public Iterable<Size> getAllSizes() {

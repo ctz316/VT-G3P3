@@ -21,7 +21,7 @@ import com.skillstorm.project3.services.CaliberService;
 public class CaliberController {
 
     @Autowired
-    CaliberService calService;
+    private CaliberService calService;
 
     @GetMapping("/all")
     public Iterable<Caliber> getAllCalibers() {

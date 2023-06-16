@@ -19,16 +19,16 @@ import com.skillstorm.project3.services.SizeService;
 public class ProductPlusController {
 	
 	@Autowired
-	ProductService prodServ;
+	private ProductService prodServ;
 	
 	@Autowired
-	CaliberService caliberServ;
+	private CaliberService caliberServ;
 	
 	@Autowired
-	SizeService sizeServ;
+	private SizeService sizeServ;
 	
 	@Autowired
-	CategoryRepository catRepo;
+	private CategoryRepository catRepo;
 	
 	@GetMapping("/all")
 	public Iterable<Product> getAllProducts() {
