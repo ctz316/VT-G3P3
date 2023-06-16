@@ -39,7 +39,6 @@ public class ProductPlusController {
 	
 	@GetMapping("/all")
 	public Iterable<Product> getAllProducts() {
-		System.out.println("in p all" + prodServ.getAllProducts());
 		return prodServ.getAllProducts();
 	}
 	
