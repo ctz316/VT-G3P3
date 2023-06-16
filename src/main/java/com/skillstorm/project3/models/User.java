@@ -26,17 +26,21 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
+	@Column(name = "name")
+	private String name;
+	
 	@OneToOne	
 	@JoinColumn(name = "permission_level")
 	private PermissionLevel permissionLevel;
 	
 	public User() { }
 
-	public User(int userId, String email, String password, PermissionLevel permissionLevel) {
+	public User(int userId, String email, String password, String name, PermissionLevel permissionLevel) {
 		super();
 		this.userId = userId;
 		this.email = email;
 		this.password = password;
+		this.name = name;
 		this.permissionLevel = permissionLevel;
 	}
 
@@ -63,6 +67,14 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public PermissionLevel getPermissionLevel() {
 		return permissionLevel;
@@ -73,8 +85,14 @@ public class User {
 	}
 
 	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name
+				+ ", permissionLevel=" + permissionLevel + "]";
+	}
+
+	@Override
 	public int hashCode() {
-		return Objects.hash(userId);
+		return Objects.hash(email, name, password, permissionLevel, userId);
 	}
 
 	@Override
@@ -86,12 +104,10 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return userId == other.userId;
+		return Objects.equals(email, other.email) && Objects.equals(name, other.name)
+				&& Objects.equals(password, other.password) && Objects.equals(permissionLevel, other.permissionLevel)
+				&& userId == other.userId;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", permissionLevel="
-				+ permissionLevel + "]";
-	}	
+	
 }
